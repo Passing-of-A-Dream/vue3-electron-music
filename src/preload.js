@@ -5,7 +5,7 @@ contextBridge.exposeInMainWorld('electron', {
     onSystemThemeChanged: (callback) => ipcRenderer.on('system-theme-changed', callback),
     getSystemTheme: () => ipcRenderer.invoke('get-system-theme'),
     openDevTools: () => ipcRenderer.invoke('open-dev-tools'),
-    onWindowResized: (callback) => ipcRenderer.on('window-resized', callback),
+    onWindowResized: (callback) => ipcRenderer.on('window-resized', (event, size) => callback(size)),
 })
 
 contextBridge.exposeInMainWorld("darkMode", {

@@ -1,0 +1,93 @@
+{
+  "id": "4206150",
+  "name": "electron-music",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1488913",
+      "name": "快进",
+      "font_class": "kuaijin",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "1488892",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "1488893",
+      "name": "单曲循环",
+      "font_class": "danquxunhuan",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "1488898",
+      "name": "静音",
+      "font_class": "jingyin",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "1488899",
+      "name": "列表循环",
+      "font_class": "liebiaoxunhuan",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "1488901",
+      "name": "声音",
+      "font_class": "shengyin",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "1488902",
+      "name": "快退",
+      "font_class": "kuaitui",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "1488903",
+      "name": "随机",
+      "font_class": "suiji",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "1488904",
+      "name": "喜爱",
+      "font_class": "xiai",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "1488905",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "1488908",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "1488915",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    }
+  ]
+}

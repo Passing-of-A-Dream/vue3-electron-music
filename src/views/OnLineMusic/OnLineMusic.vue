@@ -3,44 +3,57 @@ import {
     getBanner,
     getPersonalized,
     getPersonalizedNewsong,
+    getPlayList,
 } from "@/axios/request";
-import { useWinSizeStore } from "@/stores/winSize";
 import { useMusicStore } from "@/stores/music";
 import { storeToRefs } from "pinia";
-const winSizeStore = storeToRefs(useWinSizeStore());
+import { winSize } from "./reactive";
 const musicStore = storeToRefs(useMusicStore());
 const bannersHeight = ref("200px"); // 轮播图高度
-// 监听窗口大小变化
 watch(
-    () => winSizeStore.winSize.value,
+    () => winSize.width,
     newVal => {
-        if (newVal.width > 1400) {
+        if (newVal > 1400) {
             bannersHeight.value = "300px";
         } else {
             bannersHeight.value = "200px";
         }
     },
-    { immediate: true, deep: true },
 );
 const banners = ref([]); // 轮播图
 const personalized = ref([]); // 推荐歌单
 const newSong = ref([]); // 推荐音乐
-// 获取轮播图
-getBanner().then(res => {
-    banners.value = res.banners;
-});
-// 获取推荐歌单
-getPersonalized(10).then(res => {
-    personalized.value = res.result;
-});
-// 获取推荐音乐
-getPersonalizedNewsong().then(res => {
-    newSong.value = res.result;
+
+onMounted(() => {
+    // 获取轮播图
+    getBanner().then(res => {
+        banners.value = res.banners;
+    });
+    // 获取推荐歌单
+    getPersonalized(10).then(res => {
+        personalized.value = res.result;
+    });
+    // 获取推荐音乐
+    getPersonalizedNewsong().then(res => {
+        newSong.value = res.result;
+    });
 });
 
+// 播放音乐
 function playNewMusic(item) {
     musicStore.musicList.value = [];
     musicStore.musicList.value.push(item.id);
+}
+// 播放歌单
+function playPlayList(params) {
+    getPlayList({
+        id: params.id,
+    }).then(res=>{
+        musicStore.musicList.value = [];
+        res.songs.forEach((item,index) => {
+            musicStore.musicList.value.push(item.id)
+        })
+    })
 }
 </script>
 
@@ -73,6 +86,7 @@ function playNewMusic(item) {
                         class="item"
                         v-for="item in personalized"
                         :key="item.id"
+                        @click="playPlayList(item)"
                     >
                         <img :src="item.picUrl" :alt="item.name" />
                         <span>{{ item.name }}</span>
@@ -82,7 +96,12 @@ function playNewMusic(item) {
             <div class="new-song">
                 <h3>推荐音乐</h3>
                 <div class="container">
-                    <div class="item" v-for="item in newSong" :key="item.id" @click="playNewMusic(item)">
+                    <div
+                        class="item"
+                        v-for="item in newSong"
+                        :key="item.id"
+                        @click="playNewMusic(item)"
+                    >
                         <img :src="item.picUrl" :alt="item.name" />
                         <span>{{ item.name }}</span>
                     </div>
@@ -94,12 +113,11 @@ function playNewMusic(item) {
 
 <style lang="scss" setup>
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 5px;
 }
 // 滚动条滑块
 ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: var(--el-color-primary-light-5);
     border-radius: 10px;
 }
 // 滚动条轨道
@@ -140,7 +158,7 @@ function playNewMusic(item) {
                 width: 100%;
                 display: grid;
                 padding: var(--item-padding);
-                grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
                 gap: 20px;
                 .item {
                     height: auto;
@@ -154,7 +172,7 @@ function playNewMusic(item) {
                     gap: 5px;
                     &:hover img {
                         transform: scale(1.1) translateY(-5px);
-                        box-shadow: 1px 1px 10px #ccc;
+                        box-shadow: var(--el-box-shadow);
                     }
                     img {
                         height: calc(100% - 10px);
@@ -192,12 +210,9 @@ function playNewMusic(item) {
                         // 背景渐变色
                         background-image: linear-gradient(
                             to right,
-                            var(--el-color-white),
-                            var(--el-color-primary-light-9),
+                            var(--el-mask-color),
+                            var(--el-color-primary-light-5)
                         );
-                        span {
-                            color: var(--el-color-primary-light-3);
-                        }
                     }
                     img {
                         width: 50px;

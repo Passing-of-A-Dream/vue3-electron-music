@@ -4,7 +4,8 @@ import axios from 'axios'
 // 创建axios实例
 const request = axios.create({
     baseURL: 'http://localhost:3000',
-    timeout: 1000,
+    timeout: 3000,
+    withCredentials: true, // 跨域请求时是否需要使用凭证
     onUploadProgress: progressEvent => {
         
     },
@@ -17,6 +18,10 @@ const request = axios.create({
 request.interceptors.request.use(
     config => {
         // 在发送请求之前做些什么
+        config.params = {
+            ...config.params,
+            t: new Date().getTime()
+        }
         return config
     }
 )

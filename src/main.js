@@ -7,6 +7,9 @@ import App from './App.vue'
 import router from './router'
 import ElementPlus from 'element-plus'
 
+// 引入iconfont图标
+import './assets/font/iconfont.js'
+
 // 引入element-plus的暗色主题
 import 'element-plus/theme-chalk/dark/css-vars.css'
 

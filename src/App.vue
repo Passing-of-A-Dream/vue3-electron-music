@@ -112,7 +112,7 @@ function handleMenuClick(item) {
         height: 100%;
         width: calc(100% - var(--left-width));
         position: relative;
-        --music-play-height: 60px;
+        --music-play-height: 70px;
         .views {
             height: 100%;
             padding-bottom: var(--music-play-height);

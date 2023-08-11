@@ -1,38 +1,18 @@
+import { dayjs } from "element-plus"
+
 /**
- * @author ybl
- * @param {{
- *  title: string
- *  messageBody: {
- *     body: string
- *     icon: string
- *     image: string
- *  }
- *  showTime: number
- *  onClick: () => void
- *  onError: () => void
- *  onClose: () => void
- * }} param0 title: 标题, messageBody: 消息体, showTime: 显示时间, onClick: 点击事件, onError: 错误事件, onClose: 关闭事件
- * @returns none
+ * 格式化时间
+ * @param {Date | number} time 时间，可以是Date对象，也可以是时间戳
+ * @returns {string} 格式化后的时间
  */
-const notification = ({
-    title = 'Notification',
-    messageBody = { body: 'This is a notification' },
-    showTime = 2000,
-    onClick,
-    onError,
-    onClose,
-}) => {
-    const notification = new Notification(title, messageBody)
-    notification.onshow = () => {
-        setTimeout(() => {
-            notification.close()
-        }, showTime)
+function formatTime(time) {
+    if (time > 3600) {
+        return dayjs(time * 1000).format('HH:mm:ss')
+    } else {
+        return dayjs(time * 1000).format('mm:ss')
     }
-    notification.onclick = onClick
-    notification.onerror = onError
-    notification.onclose = onClose
 }
 
 export {
-    notification,
+    formatTime,
 }
